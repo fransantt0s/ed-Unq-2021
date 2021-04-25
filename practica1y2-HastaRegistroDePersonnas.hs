@@ -153,6 +153,9 @@
     juntarPokemones:: (Entrenador,Entrenador) -> [Pokemon]
     juntarPokemones (e1,e2) = agarrarPokemones e1 ++ agarrarPokemones e2
 
+
+    
+
     
 ------ Funciones Polimorficas --------------------------------
 
@@ -280,6 +283,77 @@
     losPrimeros 0 xs = []  
     losPrimeros n [] = [] 
     losPrimeros n (x:xs) = x : losPrimeros (n-1) xs
+
+    zipMaximos:: [Int] -> [Int] -> [Int]
+    zipMaximos [] [] = []
+    zipMaximos []ls = ls
+    zipMaximos ls [] = ls 
+    zipMaximos (x:xs) (y:ys) = max x y : zipMaximos xs ys 
+
+    elMinimo:: Ord a => [a] -> a
+    elMinimo [] = error "la lista esta vacia"
+    elMinimo(xs) = minimum xs 
+
+    factorial :: Int -> Int 
+    factorial 0 = 1 
+    factorial n = n * factorial (n-1)
+
+    cuentaRegresiva :: Int -> [Int]
+    cuentaRegresiva 0 = []
+    cuentaRegresiva n = n : cuentaRegresiva(n-1)
+
+    repetir :: Int -> a -> [a]
+    repetir 0 e = []
+    repetir n e = e : repetir (n-1) e 
+
+    primeros :: Int -> [a] -> [a]
+    primeros n [] = []
+    primeros 0 ls = []
+    primeros n (x:xs) = x : primeros(n-1) xs
+
+    sinLosPrimeros :: Int -> [a] -> [a]
+    sinLosPrimeros n [] = []
+    sinLosPrimeros 0 ls = ls 
+    sinLosPrimeros n xs =  sinLosPrimeros(n-1) (sinElPrimero xs)
+
+    ------Registros ------------------------------
+    mayoresA:: Int -> [Persona] -> [Persona]
+    mayoresA 0 xs = xs 
+    mayoresA n [] = []
+    mayoresA n (x:xs) = if  edad x > n 
+                         then x : mayoresA n xs 
+                         else mayoresA n xs
+
+
+    sumarEdades :: [Persona] -> Int 
+    sumarEdades [] = 0
+    sumarEdades (x:xs) = edad x + sumarEdades xs 
+
+    promedioEdad :: [Persona] -> Int
+    promedioEdad [] = 0
+    promedioEdad xs =  div (sumarEdades xs) (length xs)
+
+    edadesDeLasPersonas :: [Persona] -> [Int]
+    edadesDeLasPersonas [] = []
+    edadesDeLasPersonas (x:xs) = edad x : edadesDeLasPersonas xs 
+
+    -- edadMasAlta ::[Persona] -> Int  
+    -- edadMasAlta (x:xs) =  
+
+    persona3 = P "Carlos" 69 
+    persona4 = P "Carlos" 99 
+
+    elMasViejo :: [Persona] -> Persona
+    elMasViejo (x:[]) = x 
+    elMasViejo (xs) = if edad (elPrimero xs) == maximum (edadesDeLasPersonas xs)
+                        then elPrimero xs 
+                        else elMasViejo (sinElPrimero xs)                        
+
+
+    
+
+
+
 
 
     
